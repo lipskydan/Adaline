@@ -1,3 +1,9 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+
+
 class AdalineGD(object):
     """Adaptive Linear Neuron classifier.
 
@@ -66,3 +72,40 @@ class AdalineGD(object):
     def predict(self, X):
         """Return class label after unit step"""
         return np.where(self.activation(self.net_input(X)) >= 0.0, 1, -1)
+
+
+v1 = np.array([1, 2, 3])
+v2 = 0.5 * v1
+np.arccos(v1.dot(v2) / (np.linalg.norm(v1) * np.linalg.norm(v2)))
+
+df = pd.read_csv('/Users/danial/Documents/GitHub/Adaline/App/iris.data', header=None)
+df.tail()
+
+df = pd.read_csv('iris.data', header=None)
+df.tail()
+
+# select setosa (щетинистый) and versicolor (разноцветный)
+y = df.iloc[0:100, 4].values
+y = np.where(y == 'Iris-setosa', -1, 1)
+
+# extract sepal length and petal length
+X = df.iloc[0:100, [0, 2]].values
+
+
+
+fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
+
+ada1 = AdalineGD(n_iter=10, eta=0.01).fit(X, y)
+ax[0].plot(range(1, len(ada1.cost_) + 1), np.log10(ada1.cost_), marker='o')
+ax[0].set_xlabel('Эпохи')
+ax[0].set_ylabel('log(Сумма квадратичных ошибок)')
+ax[0].set_title('Adaline - Скорость обучения 0.01')
+
+ada2 = AdalineGD(n_iter=10, eta=0.0001).fit(X, y)
+ax[1].plot(range(1, len(ada2.cost_) + 1), ada2.cost_, marker='o')
+ax[1].set_xlabel('Эпохи')
+ax[1].set_ylabel('Сумма квадратичных ошибок')
+ax[1].set_title('Adaline - Скорость обучения 0.0001')
+
+plt.savefig('images/learning_rate.png', dpi=300)
+plt.show()
