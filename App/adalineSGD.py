@@ -108,3 +108,48 @@ class AdalineSGD(object):
     def predict(self, X):
         """Return class label after unit step"""
         return np.where(self.activation(self.net_input(X)) >= 0.0, 1, -1)
+
+
+v1 = np.array([1, 2, 3])
+v2 = 0.5 * v1
+np.arccos(v1.dot(v2) / (np.linalg.norm(v1) * np.linalg.norm(v2)))
+
+df = pd.read_csv('/Users/danial/Documents/GitHub/Adaline/App/iris.data', header=None)
+df.tail()
+
+df = pd.read_csv('iris.data', header=None)
+df.tail()
+
+# select setosa (щетинистый) and versicolor (разноцветный)
+y = df.iloc[0:100, 4].values
+y = np.where(y == 'Iris-setosa', -1, 1)
+
+# extract sepal length and petal length
+X = df.iloc[0:100, [0, 2]].values
+
+# standardize features
+X_std = np.copy(X)
+X_std[:, 0] = (X[:, 0] - X[:, 0].mean()) / X[:, 0].std()
+X_std[:, 1] = (X[:, 1] - X[:, 1].mean()) / X[:, 1].std()
+
+
+ada = AdalineSGD(n_iter=15, eta=0.01, random_state=1)
+ada.fit(X_std, y)
+
+plot_decision_regions(X_std, y, classifier=ada)
+plt.title('Adaline - Gradient Descent')
+plt.xlabel('sepal length [standardized]')
+plt.ylabel('petal length [standardized]')
+plt.legend(loc='upper left')
+plt.tight_layout()
+plt.savefig('images/adalineSGD/adalineSGD_gradient_descent.png', dpi=300)
+plt.show()
+
+plt.plot(range(1, len(ada.cost_) + 1), ada.cost_, marker='o')
+plt.xlabel('Epochs')
+plt.ylabel('Sum-squared-error')
+
+plt.tight_layout()
+plt.savefig('images/adalineSGD/learning_rate_AdalineSGD_standardized.png', dpi=300)
+plt.show()
+

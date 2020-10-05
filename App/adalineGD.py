@@ -137,8 +137,9 @@ ax[1].set_xlabel('Эпохи')
 ax[1].set_ylabel('Сумма квадратичных ошибок')
 ax[1].set_title('Adaline - Скорость обучения 0.0001')
 
-plt.savefig('images/learning_rate_AdalineGD.png', dpi=300)
-plt.show()
+plt.tight_layout()
+plt.savefig('images/adalineGD/learning_rate_AdalineGD.png', dpi=300)
+# plt.show()
 
 X_std = np.copy(X)
 X_std[:, 0] = (X[:, 0] - X[:, 0].mean()) / X[:, 0].std()
@@ -153,12 +154,13 @@ plt.xlabel('длина чашелистка [стандартизированн�
 plt.ylabel('длина лепестка [стандартизированная]')
 plt.legend(loc='upper left')
 
-plt.savefig('images/adaline_gradient_descent', dpi=300)
-plt.show()
+plt.savefig('images/adalineGD/adalineGD_gradient_descent.png', dpi=300)
+# plt.show()
 
 plt.plot(range(1, len(ada.cost_) + 1), ada.cost_, marker='o')
 plt.xlabel('Эпохи')
 plt.ylabel('Сумма квадратичных ошибок')
 
-plt.savefig('images/learning_rate_AdalineGD_standardized.png', dpi=300)
-plt.show()
+plt.tight_layout()
+plt.savefig('images/adalineGD/learning_rate_AdalineGD_standardized.png', dpi=300)
+# plt.show()
