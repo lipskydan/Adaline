@@ -77,41 +77,9 @@ class AdalineGD(object):
         return np.where(self.activation(self.net_input(X)) >= 0.0, 1, -1)
 
 
-# def plot_decision_regions(X, y, classifier, resolution=0.02):
-#
-#     # setup marker generator and color map
-#     markers = ('s', 'x', 'o', '^', 'v')
-#     colors = ('red', 'blue', 'lightgreen', 'gray', 'cyan')
-#     cmap = ListedColormap(colors[:len(np.unique(y))])
-#
-#     # plot the decision surface
-#     x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-#     x2_min, x2_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-#     xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, resolution),
-#                            np.arange(x2_min, x2_max, resolution))
-#     Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
-#     Z = Z.reshape(xx1.shape)
-#     plt.contourf(xx1, xx2, Z, alpha=0.3, cmap=cmap)
-#     plt.xlim(xx1.min(), xx1.max())
-#     plt.ylim(xx2.min(), xx2.max())
-#
-#     # plot class samples
-#     for idx, cl in enumerate(np.unique(y)):
-#         plt.scatter(x=X[y == cl, 0],
-#                     y=X[y == cl, 1],
-#                     alpha=0.8,
-#                     c=colors[idx],
-#                     marker=markers[idx],
-#                     label=cl,
-#                     edgecolor='black')
-
-
 v1 = np.array([1, 2, 3])
 v2 = 0.5 * v1
 np.arccos(v1.dot(v2) / (np.linalg.norm(v1) * np.linalg.norm(v2)))
-
-df = pd.read_csv('/Users/danial/Documents/GitHub/Adaline/App/iris.data', header=None)
-df.tail()
 
 df = pd.read_csv('iris.data', header=None)
 df.tail()
@@ -138,7 +106,7 @@ ax[1].set_ylabel('Сумма квадратичных ошибок')
 ax[1].set_title('Adaline - Скорость обучения 0.0001')
 
 plt.tight_layout()
-plt.savefig('images/adalineGD/learning_rate_AdalineGD.png', dpi=300)
+plt.savefig('images/learning_rate_AdalineGD.png', dpi=300)
 # plt.show()
 
 X_std = np.copy(X)
@@ -154,7 +122,7 @@ plt.xlabel('длина чашелистка [стандартизированн�
 plt.ylabel('длина лепестка [стандартизированная]')
 plt.legend(loc='upper left')
 
-plt.savefig('images/adalineGD/adalineGD_gradient_descent.png', dpi=300)
+plt.savefig('images/adalineGD_gradient_descent.png', dpi=300)
 # plt.show()
 
 plt.plot(range(1, len(ada.cost_) + 1), ada.cost_, marker='o')
@@ -162,5 +130,5 @@ plt.xlabel('Эпохи')
 plt.ylabel('Сумма квадратичных ошибок')
 
 plt.tight_layout()
-plt.savefig('images/adalineGD/learning_rate_AdalineGD_standardized.png', dpi=300)
+plt.savefig('images/learning_rate_AdalineGD_standardized.png', dpi=300)
 # plt.show()
