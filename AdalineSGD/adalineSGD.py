@@ -144,7 +144,7 @@ plt.show()
 
 plt.plot(range(1, len(ada.cost_) + 1), ada.cost_, marker='o')
 plt.xlabel('Эпохи')
-plt.ylabel('Сумма квадратичных ошибок')
+plt.ylabel('Усредненные издержки')
 
 plt.tight_layout()
 plt.savefig('images/learning_rate_standardized.png', dpi=300)
