@@ -16,3 +16,13 @@ Dataset is file 'iris.data'. Each realisation has this file in root.
 
 ### Visualisation
 
+Each realisation has directory 'images' where we can see information about learning rate (simple one and after
+standardisation. The meaning of word 'standardisation' will be explained in next subtitle) and result of binary 
+classification.
+
+### Standardisation
+
+Standardization is one method for scaling features. This method gives the data the quality of a standard normal 
+distribution, which facilitates faster convergence of gradient descent training.
+
+
